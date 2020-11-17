@@ -3,13 +3,20 @@
 
   <% @tasks.each do |task| %>
     <% if task.title != nil %>
-      <%= check_box_tag 'completed', "#{task.completed}", "#{task.completed}", disabled: false %> <%= link_to("#{task.title}", task_path(task.id)) %> <br>
+      <div class="task-container">
+        <div class="completed"><%= check_box_tag 'completed', task.completed, task.completed, disabled: true %></div>
+        <div class="title"><%= link_to("#{task.title}", task_path(task.id)) %></div>
+        <div class="delete"> <%= link_to 'Delete', task_path(task.id),
+          method: :delete,
+          data: {confirm: "Are you sure you want to delete #{task.title}?"} %></div>
+      </div>
     <% else %>
       <% "" %>
     <% end %>
   <% end %>
 </div>
 
+
 <div class="page-link">
-<%= link_to '+ Add a new task', tasks_new_path   %>
+<%= link_to '+ Add a new task', tasks_new_path %>
 </div>
