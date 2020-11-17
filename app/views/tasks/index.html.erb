@@ -1,3 +1,15 @@
-<% @tasks.each do |task| %>
-<%= "#{task.completed} -->"  %> <%= link_to("#{task.title}", task_path(task.id)) %>
-<% end %>
+<div class="container">
+  <h1>My Tasks</h1>
+
+  <% @tasks.each do |task| %>
+    <% if task.title != nil %>
+      <%= check_box_tag 'completed', "#{task.completed}", "#{task.completed}", disabled: false %> <%= link_to("#{task.title}", task_path(task.id)) %> <br>
+    <% else %>
+      <% "" %>
+    <% end %>
+  <% end %>
+</div>
+
+<div class="page-link">
+<%= link_to '+ Add a new task', tasks_new_path   %>
+</div>
